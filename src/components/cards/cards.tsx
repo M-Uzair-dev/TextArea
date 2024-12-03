@@ -84,13 +84,17 @@ const cards = ({
     }
   };
   useEffect(() => {
-    setTimeout(() => {
-      if (document) {
+    // Check if running on the client
+    if (typeof window !== "undefined") {
+      setTimeout(() => {
         document.querySelector(".sidebar")?.classList.add("transition");
-      }
-    }, 500);
-    userID = getCookie("user");
-    fetchData();
+      }, 500);
+
+      const userID = getCookie("user");
+      console.log("User ID:", userID);
+
+      fetchData();
+    }
   }, []);
 
   return (
