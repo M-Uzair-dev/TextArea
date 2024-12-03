@@ -17,7 +17,9 @@ const SignInForm: React.FC = () => {
   const answer = getCookie("user");
   useEffect(() => {
     if (answer) {
-      window.location.href = "/";
+      if (typeof window !== "undefined") {
+        window.location.href = "/";
+      }
     }
   });
 
@@ -47,7 +49,9 @@ const SignInForm: React.FC = () => {
           document.cookie = `user=${user._id.toString()}; expires=${new Date(
             Date.now() + 7 * 24 * 60 * 60 * 1000
           ).toUTCString()}; path=/; SameSite=None; Secure;`;
-          localStorage.setItem("image", user.pfp);
+          if (typeof window !== "undefined") {
+            localStorage.setItem("image", user.pfp);
+          }
           toast.success("Logged in successfully");
           setLoading("");
           router.push("/");
@@ -76,8 +80,9 @@ const SignInForm: React.FC = () => {
           document.cookie = `user=${user._id.toString()}; expires=${new Date(
             Date.now() + 7 * 24 * 60 * 60 * 1000
           ).toUTCString()}; path=/; SameSite=None; Secure;`;
-
-          localStorage.setItem("image", user.pfp);
+          if (typeof window !== "undefined") {
+            localStorage.setItem("image", user.pfp);
+          }
           toast.success("Logged in successfully");
           setLoading("");
           router.push("/");

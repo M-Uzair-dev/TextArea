@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { getGithubInfo } from "@/actions/auth";
 import { toast } from "sonner";
@@ -16,18 +16,26 @@ const getGithub = async (secretCode: string) => {
           Date.now() + 7 * 24 * 60 * 60 * 1000
         ).toUTCString()}; path=/; SameSite=None; Secure;`;
         localStorage.setItem("image", user.pfp);
-        window.location.href = "/";
+        if (typeof window !== "undefined") {
+          window.location.href = "/";
+        }
         toast.success("Logged in successfully");
       } else {
-        window.location.href = "/signup";
+        if (typeof window !== "undefined") {
+          window.location.href = "/signup";
+        }
         toast.error("Something went wrong, Please try again later.");
       }
     } else {
-      window.location.href = "/signup";
+      if (typeof window !== "undefined") {
+        window.location.href = "/signup";
+      }
       toast.error("Something went wrong, Please try again later.");
     }
   } catch (error) {
-    window.location.href = "/signup";
+    if (typeof window !== "undefined") {
+      window.location.href = "/signup";
+    }
     toast.error("Something went wrong, Please try again later.");
   }
 };
@@ -41,7 +49,9 @@ const Page = () => {
     if (code) {
       getGithub(code);
     } else {
-      window.location.href = "/";
+      if (typeof window !== "undefined") {
+        window.location.href = "/";
+      }
     }
   }, [searchParams]);
 
@@ -62,4 +72,10 @@ const Page = () => {
   );
 };
 
-export default Page;
+const PageWithSuspense = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Page />
+  </Suspense>
+);
+
+export default PageWithSuspense;

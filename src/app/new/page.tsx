@@ -18,7 +18,9 @@ const page = () => {
 
   useEffect(() => {
     if (!answer) {
-      window.location.href = "/";
+      if (typeof window !== "undefined") {
+        window.location.href = "/";
+      }
     }
   }, []);
 
@@ -30,7 +32,9 @@ const page = () => {
     }
 
     if (!answer) {
-      window.location.href = "/";
+      if (typeof window !== "undefined") {
+        window.location.href = "/";
+      }
       return;
     }
 

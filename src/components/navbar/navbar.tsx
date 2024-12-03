@@ -12,7 +12,10 @@ import { getCookie } from "@/utils/utils";
 const navbar = () => {
   const router = useRouter();
   const answer = getCookie("user");
-  const pfp = localStorage.getItem("image");
+  let pfp;
+  if (typeof window !== "undefined") {
+    pfp = localStorage.getItem("image");
+  }
   const [inputVaue, setInputValue] = useState("");
   const debouncedInputValue = useDebounce(inputVaue, 500);
   React.useEffect(() => {

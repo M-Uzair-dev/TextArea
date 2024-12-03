@@ -5,7 +5,7 @@ import { providerSignin } from "./actions/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: "AIzaSyB91vQLzXmQ7mqWKRCbvOTeNBcDjc7Vzz0",
   authDomain: "thoughts-area-ce3d6.firebaseapp.com",
   projectId: "thoughts-area-ce3d6",
   storageBucket: "thoughts-area-ce3d6.firebasestorage.app",
