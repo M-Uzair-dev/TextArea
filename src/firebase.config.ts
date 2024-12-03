@@ -13,10 +13,6 @@ const firebaseConfig = {
   appId: "1:50121739192:web:ad285c2848ef14c4989d4d",
   measurementId: "G-BVNENMFQW1",
 };
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 export const GoogleSignin = async () => {
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
@@ -42,8 +38,14 @@ export const GoogleSignin = async () => {
     };
   }
 };
+let app: any;
+let storage: any;
+if (typeof window !== "undefined") {
+  app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
-const storage = getStorage(app);
+  storage = getStorage(app);
+}
 export { storage };
 
 export default app;
