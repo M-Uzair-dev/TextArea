@@ -1,0 +1,46 @@
+.newPost {
+  height: calc(100vh - 70px);
+  width: 100%;
+  overflow-y: scroll;
+  padding: 0;
+}
+.newPost h1 {
+  font-size: 22px;
+  margin: 7px 0 15px 10px;
+  font-weight: 400;
+}
+.newPost input,
+.newPost label,
+.newPost textarea {
+  margin: 10px;
+  min-width: 50vw;
+}
+
+.newPost button {
+  margin: 10px;
+}
+.newPost button {
+  padding: 10px 30px;
+}
+.newPost textarea {
+  min-width: 200px;
+  min-height: 100px;
+  max-height: 50vh;
+
+  min-width: 50vw;
+}
+
+@media (max-width: 610px) {
+  .newPost {
+    width: 100vw;
+    padding: 0 5vw;
+  }
+  .newPost input,
+  .newPost textarea {
+    width: 100%;
+    margin-left: 0;
+  }
+  .newPost * {
+    margin-left: 0 !important;
+  }
+}

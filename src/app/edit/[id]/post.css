@@ -1,0 +1,45 @@
+.editpost {
+  height: calc(100vh - 70px);
+  width: 100%;
+  overflow-y: scroll;
+  padding: 0;
+}
+.editpost:has(.loaderdivinpost) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.editpost h1 {
+  font-size: 22px;
+  margin: 7px 0 15px 10px;
+  font-weight: 400;
+}
+.editpost input,
+.editpost label,
+.editpost textarea {
+  margin: 10px;
+  min-width: 50vw;
+}
+.editpost button {
+  margin: 10px;
+  padding: 10px 30px;
+}
+.editpost textarea {
+  min-height: 100px;
+  max-height: 50vh;
+}
+
+@media (max-width: 610px) {
+  .editpost {
+    width: 100vw;
+    padding: 0 5vw;
+  }
+  .editpost input,
+  .editpost textarea {
+    width: 100%;
+    margin-left: 0;
+  }
+  .editpost * {
+    margin-left: 0 !important;
+  }
+}

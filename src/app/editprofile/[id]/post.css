@@ -1,0 +1,119 @@
+.post {
+  height: calc(100vh - 70px);
+  width: 100%;
+  overflow-y: scroll;
+  padding: 0;
+}
+.post:has(.loaderinpostupdatediv) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.post h1 {
+  font-size: 22px;
+  margin: 7px 0 15px 10px;
+  font-weight: 400;
+}
+.post form > input,
+.post form > label,
+.post form > textarea {
+  margin: 10px;
+  min-width: 50vw;
+}
+
+.post form > button {
+  margin: 10px;
+}
+.post button {
+  padding: 10px 30px;
+}
+.post textarea {
+  min-width: 200px;
+  min-height: 100px;
+  max-height: 50vh;
+}
+
+@media (max-width: 610px) {
+  .post {
+    width: 100vw;
+    padding: 0 5vw;
+  }
+  .post input,
+  .post textarea {
+    width: 100%;
+    margin-left: 0;
+  }
+  .post * {
+    margin-left: 0 !important;
+  }
+}
+/* General reset for appearance */
+.file-input-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.custom-file-input {
+  opacity: 0; /* Hides the input */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.custom-file-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border: 2px solid #7d2ae8;
+  border-radius: 5px;
+  background-color: #7025d1;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 300;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
+}
+
+.custom-file-label:hover {
+  background-color: #6822c4;
+  border-color: #5c13bb;
+}
+
+.custom-file-label span {
+  pointer-events: none; /* Prevents interaction with the label's text */
+}
+.pfpdiv {
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.021);
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  max-width: 90vw;
+}
+.pfpdiv p {
+  max-width: 100%;
+  text-align: center;
+  word-wrap: break-word;
+}
+.pfpdiv .custom-file-label {
+  margin: 0 !important;
+  border: 2px solid #b6040d;
+  background-color: #c41a22;
+}
+.pfpdiv img {
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  border-radius: 10000px;
+}

@@ -1,0 +1,101 @@
+body {
+  background-color: #101010;
+  color: white;
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", serif;
+}
+.main {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: calc(100dvh - 70px);
+  position: relative;
+}
+.rest {
+  flex: 5;
+  outline: none;
+}
+.signin {
+  outline: none;
+}
+.hamburger {
+  filter: invert(1);
+  display: none;
+}
+.transition {
+  transition: all 0.5s ease;
+}
+
+@media (max-width: 610px) {
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: calc(100dvh - 70px);
+    background-color: #101010;
+    z-index: 10;
+    width: 100vw;
+    transform: translateX(-100%);
+    padding: 0px 5vw;
+  }
+  .main {
+    padding: 0 5vw !important;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .cards {
+    padding: 0 !important;
+  }
+}
+.active {
+  transform: translateX(0);
+}
+/* Customize the entire scrollbar */
+::-webkit-scrollbar {
+  width: 4px; /* Width for vertical scrollbar */
+  height: 4px; /* Height for horizontal scrollbar */
+}
+
+/* Customize the scrollbar track */
+::-webkit-scrollbar-track {
+  background: #202020; /* Light gray background */
+  border-radius: 6px;
+}
+
+/* Customize the scrollbar thumb (scroll box) */
+::-webkit-scrollbar-thumb {
+  background: #505050; /* Darker gray for the scroll thumb */
+  border-radius: 6px;
+}
+
+/* Add hover effect to scrollbar thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: #404040; /* Even darker gray on hover */
+}
+:root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden !important;
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}

@@ -1,0 +1,45 @@
+.navigation img {
+  filter: invert(1);
+}
+.navigation .icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #7c2ae813;
+  width: 140px;
+  height: 80px;
+  text-align: center;
+  border-radius: 10px;
+  scale: 1;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.navigation .icon:hover {
+  background-color: #7c2ae81e;
+}
+.navigation {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.navigation .icon p {
+  font-size: 13px;
+  line-height: 16px;
+}
+@media (max-width: 500px) {
+  .navigation .icon {
+    flex: 1;
+    margin: 0;
+  }
+  .navigation {
+    overflow: hidden;
+    gap: 10px;
+    width: 90vw;
+    justify-content: center;
+    margin: 0 auto;
+  }
+}

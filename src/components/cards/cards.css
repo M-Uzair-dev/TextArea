@@ -1,0 +1,119 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 7px;
+  padding: 10px;
+  overflow-y: scroll;
+  grid-template-rows: 200px;
+  grid-auto-rows: 200px;
+}
+
+.card {
+  background-color: #2424249a;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+}
+.card:hover {
+  background-color: #202020c5;
+}
+.userinfo {
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title {
+  flex: 8;
+  padding-top: 5px;
+  font-size: 16px;
+  line-height: 23px;
+  font-weight: 450;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.911);
+}
+.postinfo {
+  flex: 3;
+}
+.leftuserinfo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.leftuserinfo img {
+  border-radius: 1000px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.usernamediv p:nth-child(1) {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 17px;
+  margin-bottom: 3px;
+}
+.usernamediv p:nth-child(2) {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 14px;
+  color: rgba(255, 255, 255, 0.479);
+  margin: 0;
+}
+.rightuserinfo button {
+  padding: 5px 13px;
+}
+.postinfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.votes {
+  display: flex;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+}
+.votes div {
+  display: flex;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.781);
+}
+.date {
+  font-size: 14px;
+
+  color: rgba(255, 255, 255, 0.479);
+  font-weight: 300;
+}
+.votes div {
+  padding: 3px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.votes div:hover {
+  background-color: #252525;
+}
+@media (max-width: 610px) {
+  .cards {
+    width: 100vw;
+    padding: 10px 5vw !important;
+  }
+  .mainheading {
+    padding: 0 5vw !important;
+  }
+}
+.cards:has(.loader) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

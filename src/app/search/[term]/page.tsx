@@ -1,15 +1,22 @@
 import React from "react";
-import "./home.css";
+import "../../home.css";
 import Bottombar from "@/components/bottombar/bottombar";
 import Cards from "@/components/cards/cards";
 import Icon from "@/components/hamburger/hamburger";
-const Home = () => {
+const Home = ({
+  params,
+}: {
+  params: {
+    term: string;
+  };
+}) => {
   return (
     <div className="home">
       <h3 className="mainheading">
-        <Icon type="open" /> For You :{" "}
+        <Icon type="open" />
+        Search for term : {params.term}
       </h3>
-      <Cards page="foryou" />
+      <Cards page="search" term={params.term} />
       <Bottombar page="foryou" />
     </div>
   );

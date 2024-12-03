@@ -1,0 +1,118 @@
+.post {
+  height: calc(100vh - 70px);
+  overflow-y: scroll;
+  padding: 10px 10px;
+  overflow-x: hidden;
+}
+.post:has(.loaderdiv) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.post h1 {
+  font-size: 20px;
+  margin-top: 20px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+}
+.post p {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+.postinfo {
+  margin-top: 10px;
+}
+.postinfo p {
+  margin: 0;
+}
+.post .date {
+  color: rgba(255, 255, 255, 0.479);
+  font-weight: 300;
+  font-size: 13px;
+}
+.leftuserinfo,
+.usernamediv {
+  align-items: center;
+}
+.usernamediv p {
+  margin: 0;
+}
+.inpost p:nth-child(1) {
+  font-size: 22px !important;
+  margin-bottom: 5px !important;
+  line-height: 20px !important;
+}
+.top button {
+  padding: 10px 30px !important;
+}
+.comments {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.comments > h3 {
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px 0;
+}
+.comment {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: rgba(255, 255, 255, 0.041);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.comment .text {
+  font-size: 15px;
+  font-weight: 300;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.9);
+}
+@media (max-width: 610px) {
+  .post {
+    width: 100vw;
+    padding: 10px 5vw;
+  }
+}
+.addComment {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+.addComment textarea {
+  width: 100% !important;
+  margin: 20px auto 10px;
+}
+.addComment button {
+  padding: 10px 30px;
+}
+@media (max-width: 460px) {
+  .topinpost > img {
+    height: 25px;
+    width: 25px;
+  }
+  .clickable img {
+    height: 40px;
+    width: 40px;
+  }
+  .topinpost .usernamediv p:nth-child(1) {
+    font-size: 18px !important;
+  }
+  .topinpost .usernamediv p:nth-child(2) {
+    font-size: 14px !important;
+  }
+  .topinpost .rightuserinfo button {
+    padding: 7px 15px !important;
+  }
+}
+.clickable {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

@@ -1,0 +1,43 @@
+.sidebar {
+  flex: 1.2;
+  min-width: 160px;
+  background-color: #151515;
+  border-right: 1px solid rgba(255, 255, 255, 0.103);
+  border-top: 1px solid rgba(255, 255, 255, 0.103);
+  border-radius: 0 3px 0 0;
+  overflow-y: scroll;
+}
+
+.sidebar h3 {
+  font-weight: 500;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.5s ease;
+  padding: 10px 7px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.856);
+  font-weight: 400;
+  font-size: 18px;
+}
+.plus {
+  cursor: pointer;
+  background-color: #7c2ae857;
+  padding: 10px;
+  border-radius: 1000px;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+}
+.user:hover {
+  background-color: #ffffff0a;
+}

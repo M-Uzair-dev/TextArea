@@ -1,0 +1,19 @@
+.mainheading {
+  font-weight: 400;
+  padding: 7px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cards {
+  height: calc(100dvh - 220px);
+  overflow-y: scroll;
+  padding: 7px;
+}
+.navigation {
+  height: 110px;
+}
+.home {
+  height: 100%;
+}
