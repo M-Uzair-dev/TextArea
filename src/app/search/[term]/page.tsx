@@ -3,13 +3,7 @@ import "../../home.css";
 import Bottombar from "@/components/bottombar/bottombar";
 import Cards from "@/components/cards/cards";
 import Icon from "@/components/hamburger/hamburger";
-const Home = ({
-  params,
-}: {
-  params: {
-    term: string;
-  };
-}) => {
+const Home = ({ params }: { params: any }) => {
   return (
     <div className="home">
       <h3 className="mainheading">
