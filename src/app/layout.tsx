@@ -11,6 +11,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log(process.env.GitHub_Client_Secret);
   return (
     <html lang="en">
       <head>

@@ -34,6 +34,7 @@ const cards = ({
         const answer: any = await GetAllPosts(userID);
         if (answer.success) {
           setPosts(JSON.parse(answer?.posts));
+          console.log(JSON.parse(answer?.posts));
         } else {
           toast.error("No posts found.");
         }
@@ -90,13 +91,13 @@ const cards = ({
         document.querySelector(".sidebar")?.classList.add("transition");
       }, 500);
 
-      const userID = getCookie("user");
-      console.log("User ID:", userID);
+      userID = getCookie("user");
 
       fetchData();
     }
   }, []);
-
+  console.log("term : ", term);
+  console.log("my Id :", userID);
   return (
     <div
       className="cards"
@@ -114,7 +115,7 @@ const cards = ({
               Router.push(`/post/${item._id}`);
             }}
           >
-            <Card item={item} profile={page == "profile"} />
+            <Card item={item} profile={term == userID} />
           </div>
         ))
       ) : (

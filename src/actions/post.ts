@@ -213,6 +213,8 @@ export async function GetAllPosts(userId: string | undefined) {
       select: "name pfp followers _id", // Specify only the fields to retrieve
     });
 
+    console.log("The UserID is : ", userId);
+
     // Add action property based on upvotes and downvotes
     if (userId) {
       const user = await userModel.findById(userId).select("following");

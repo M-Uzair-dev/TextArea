@@ -46,7 +46,7 @@ const comments = ({
     }
   }, []);
   return (
-    <div className="comments">
+    <div className="comments" style={{ marginBottom: "20px" }}>
       <h3>Comments : </h3>
 
       {loading ? (

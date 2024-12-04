@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { getCookie } from "@/utils/utils";
 import Loader from "@/components/loader/loader";
+import { revalidatePath } from "next/cache";
 
 const page = ({ params }: { params: any }) => {
   let [userData, setUserData]: any = useState({});
@@ -122,26 +123,28 @@ const page = ({ params }: { params: any }) => {
                 {userData?.followers > 1 || (userData?.followers == 0 && "s")}
               </h3>
               <p>{userData?.bio || "No bio"}</p>
-              <button
-                style={{
-                  backgroundColor: "orangered",
-                  color: "#fff",
-                  border: "none",
-                  padding: "5px 10px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  margin: "10px 0",
-                }}
-                onClick={() => {
-                  let answer = confirm("Are you sure you want to logout ?");
-                  if (!answer) return;
-                  removeCookie("user");
-                  router.push("/");
-                  router.refresh();
-                }}
-              >
-                Logout
-              </button>
+              {id == myId && (
+                <button
+                  style={{
+                    backgroundColor: "orangered",
+                    color: "#fff",
+                    border: "none",
+                    padding: "10px 20px",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    margin: "10px 0",
+                  }}
+                  onClick={() => {
+                    let answer = confirm("Are you sure you want to logout ?");
+                    if (!answer) return;
+                    removeCookie("user");
+                    router.push("/");
+                    router.refresh();
+                  }}
+                >
+                  Logout
+                </button>
+              )}
             </div>
           </div>
         )}
