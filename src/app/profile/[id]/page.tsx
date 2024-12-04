@@ -119,8 +119,8 @@ const page = ({ params }: { params: any }) => {
             <div className="Userinfosection">
               <h1>{userData?.name || "user"}</h1>
               <h3>
-                {userData?.followers || 0} Follower
-                {userData?.followers > 1 || (userData?.followers == 0 && "s")}
+                {userData?.followers || 0}
+                {userData?.followers !== 1 ? " Followers" : " Follower"}
               </h3>
               <p>{userData?.bio || "No bio"}</p>
               {id == myId && (

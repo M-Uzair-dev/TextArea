@@ -18,14 +18,19 @@ const comment = ({ comment }: { comment: any }) => {
           />
           <div className="usernamediv">
             <p>{comment?.authorName || "User"}</p>
-            <p>{comment?.authorfollowers || "0"} followers</p>
+            <p>
+              {comment?.authorfollowers || "0"}{" "}
+              {comment?.authorfollowers == 1 ? " Follower" : " Followers"}
+            </p>
           </div>
         </div>
         <div className="rightuserinfo">
           <Button>Report</Button>
         </div>
       </div>
-      <h3 className="text">{comment.text}</h3>
+      <h3 className="text" style={{ whiteSpace: "pre-wrap" }}>
+        {comment.text}
+      </h3>
     </div>
   );
 };

@@ -99,3 +99,6 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
 }
+*:not(.post > h1, .post > p, .comment .text, ) {
+  user-select: none;
+}

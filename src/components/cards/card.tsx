@@ -155,9 +155,8 @@ const card = ({
           <div className="usernamediv">
             <p>{item.postedBy.name}</p>
             <p>
-              {item.postedBy.followers} follower
-              {item.postedBy.followers > 1 ||
-                (item.postedBy.followers == 0 && "s")}
+              {item.postedBy.followers}{" "}
+              {item.postedBy.followers == 1 ? " Follower" : " Followers"}
             </p>
           </div>
         </div>

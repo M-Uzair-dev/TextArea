@@ -75,13 +75,26 @@ export async function getPost(
           action = "none";
         }
 
+        let following = false;
+        if (userid) {
+          const me = await userModel.findById(userid);
+          if (me && me.following.length > 0) {
+            let followingList = me?.following?.map((item: any) =>
+              item.toString()
+            );
+            following = followingList.includes(post?.postedBy?.toString());
+          }
+        }
+
         user = JSON.stringify(user);
         post = JSON.stringify(post);
+
         return {
           success: true,
           post: post,
           user: user,
           action,
+          following,
         };
       } else {
         return {
@@ -212,8 +225,6 @@ export async function GetAllPosts(userId: string | undefined) {
       path: "postedBy", // Path to the reference
       select: "name pfp followers _id", // Specify only the fields to retrieve
     });
-
-    console.log("The UserID is : ", userId);
 
     // Add action property based on upvotes and downvotes
     if (userId) {

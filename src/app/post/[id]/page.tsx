@@ -17,6 +17,7 @@ import { formatDate, getCookie } from "@/utils/utils";
 import { addComment } from "@/actions/comments";
 import Comments from "@/components/comment/comments";
 import Loader from "@/components/loader/loader";
+import { toggleFollow } from "@/actions/auth";
 
 type Post = {
   _id: string;
@@ -61,6 +62,8 @@ const page = ({ params }: any) => {
   const [commentLoading, setCommentLoading] = useState(false);
   const [input, setInput] = useState("");
   const [added, setAdded] = useState<any[]>([]);
+  const [loadingFollow, setLoadingFollow] = useState(false);
+  const [following, setFollowing] = useState(false);
 
   const [action, setAction] = useState("none");
   const { id }: any = use(params);
@@ -72,6 +75,7 @@ const page = ({ params }: any) => {
         setUser(JSON.parse(answer.user));
         setPost(JSON.parse(answer.post));
         setAction(answer.action);
+        setFollowing(answer.following);
       } else {
         toast.error(
           answer.message || "Something went wrong, Please try again later."
@@ -87,6 +91,8 @@ const page = ({ params }: any) => {
   };
 
   const handleComment = async () => {
+    if (commentLoading) return;
+
     if (!userID) {
       toast.error("please login to comment.");
     }
@@ -109,6 +115,7 @@ const page = ({ params }: any) => {
         toast.success("Comment added successfully");
         let data = await JSON.parse(answer.data);
         setAdded((prev: any) => [data, ...prev]);
+        setInput("");
       } else {
         toast.error("Something went wrong !");
       }
@@ -208,6 +215,52 @@ const page = ({ params }: any) => {
       toast.error("please login to interact with a post");
     }
   };
+
+  const toggleFollowState = () => {
+    if (following) {
+      setUser((prev) => ({
+        ...prev,
+        followers: prev.followers - 1,
+      }));
+
+      setFollowing(false);
+    } else {
+      setUser((prev) => ({
+        ...prev,
+        followers: prev.followers + 1,
+      }));
+      setFollowing(true);
+    }
+  };
+  const follow = async (e: any) => {
+    try {
+      let myId = userID;
+      e.stopPropagation();
+      if (!myId) {
+        toast.error("please login to follow !");
+        return;
+      }
+      if (loadingFollow) {
+        toast.error("loading, please wait...");
+        return;
+      }
+
+      setLoadingFollow(true);
+      toggleFollowState();
+      let answer = await toggleFollow(myId, post.postedBy);
+      if (!answer.success) {
+        toast.error(answer.message || "Something went wrong !");
+        toggleFollowState();
+        return;
+      }
+    } catch (e: any) {
+      toast.error(e.message || "Something went wrong !");
+      toggleFollowState();
+    } finally {
+      setLoadingFollow(false);
+    }
+  };
+
   return (
     <div className="post">
       {loading ? (
@@ -258,11 +311,17 @@ const page = ({ params }: any) => {
               </div>
             </div>
             <div className="rightuserinfo">
-              <Button>Follow</Button>
+              {following ? (
+                <Button onClick={follow}>Unfollow</Button>
+              ) : (
+                <Button onClick={follow}>Follow</Button>
+              )}
             </div>
           </div>
           <h1>{post?.title || "Oops !"}</h1>
-          <p>{post?.thought || "Something went wrong !"}</p>
+          <p style={{ whiteSpace: "pre-wrap" }}>
+            {post?.thought || "Something went wrong !"}
+          </p>
           <div className="postinfo">
             <div className="votes">
               <div className="upvote" onClick={handleUpvote}>
@@ -321,8 +380,21 @@ const page = ({ params }: any) => {
             >
               Comment
             </Input>
-            <Button onClick={handleComment}>
-              {commentLoading ? "posting..." : "Post"}
+            <Button
+              onClick={handleComment}
+              style={
+                commentLoading
+                  ? {
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "40px",
+                      width: "88px",
+                    }
+                  : {}
+              }
+            >
+              {commentLoading ? <Loader size={0.5} white /> : "Post"}
             </Button>
           </div>
           <Comments added={added} commentsIds={post.comments} />

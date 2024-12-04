@@ -76,6 +76,9 @@ const sidebar = () => {
             key={item._id}
             onClick={() => {
               router.push("/profile/" + item._id);
+              if (typeof window !== "undefined") {
+                document.querySelector(".sidebar")?.classList.remove("active");
+              }
             }}
           >
             <p>{item.name}</p>
