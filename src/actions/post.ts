@@ -485,7 +485,7 @@ export async function GetUsersPosts(
     };
   }
 }
-export const getPostPartialData = async (id: string) => {
+export const getPostPartialData = async (id: string, userID: string) => {
   try {
     if (!id) {
       return {
@@ -499,7 +499,15 @@ export const getPostPartialData = async (id: string) => {
     const post = await postModel.findById(id, {
       title: 1,
       thought: 1,
+      postedBy: 1,
     });
+
+    if (post.postedBy.toString() !== userID) {
+      return {
+        success: false,
+        message: "Unauthorized",
+      };
+    }
 
     if (!post) {
       return {
@@ -523,17 +531,27 @@ export const getPostPartialData = async (id: string) => {
 export const updatePost = async (
   id: string,
   title: string,
-  thought: string
+  thought: string,
+  userid: string
 ) => {
   try {
-    if (!id || !title || !thought) {
+    if (!id || !title || !thought || !userid) {
       return {
         success: false,
-        message: "All parameters (id, title, thought) are required",
+        message: "All parameters are required",
       };
     }
 
     await connectDB();
+
+    const post = await postModel.findById(id);
+    const isOwner = post.postedBy.toString() === userid;
+    if (!isOwner) {
+      return {
+        success: false,
+        message: "Unauthorized",
+      };
+    }
 
     const updatedPost = await postModel.findByIdAndUpdate(
       id,

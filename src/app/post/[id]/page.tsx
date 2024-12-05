@@ -311,7 +311,15 @@ const page = ({ params }: any) => {
               </div>
             </div>
             <div className="rightuserinfo">
-              {following ? (
+              {user._id === userID ? (
+                <Button
+                  onClick={() => {
+                    router.push("/edit/" + id);
+                  }}
+                >
+                  Edit
+                </Button>
+              ) : following ? (
                 <Button onClick={follow}>Unfollow</Button>
               ) : (
                 <Button onClick={follow}>Follow</Button>

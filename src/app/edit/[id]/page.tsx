@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { getPostPartialData, updatePost } from "@/actions/post";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/loader/loader";
+import { getCookie } from "@/utils/utils";
 
 type Post = {
   title: string | undefined;
@@ -16,6 +17,7 @@ type Post = {
 };
 const page = ({ params }: { params: any }) => {
   const { id } = use<{ id: string }>(params);
+  const userID = getCookie("user");
   const [loading, setLoading] = useState<boolean>(true);
   const [updating, setUpdating] = useState<boolean>(false);
   const router = useRouter();
@@ -27,7 +29,12 @@ const page = ({ params }: { params: any }) => {
   const loadData = async () => {
     try {
       setLoading(true);
-      const answer = await getPostPartialData(id);
+      if (!userID) {
+        router.push("/");
+        toast.error("Unauthorized");
+        return;
+      }
+      const answer = await getPostPartialData(id, userID);
       if (answer.success && answer.post) {
         const { title, thought } = await JSON.parse(answer.post);
 
@@ -37,9 +44,11 @@ const page = ({ params }: { params: any }) => {
         });
       } else {
         toast.error(answer.message || "Something went wrong !");
+        router.push("/");
       }
     } catch (e: any) {
       toast.error(e.message || "Something went wrong");
+      router.push("/");
     } finally {
       setLoading(false);
     }
@@ -65,7 +74,13 @@ const page = ({ params }: { params: any }) => {
       if (updating) return;
       setUpdating(true);
 
-      const answer = await updatePost(id, data.title, data.thought);
+      if (!userID) {
+        router.push("/");
+        toast.error("Unauthorized");
+        return;
+      }
+
+      const answer = await updatePost(id, data.title, data.thought, userID);
 
       if (answer.success) {
         toast.error("Post edited successfully");

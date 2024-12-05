@@ -53,6 +53,9 @@
   flex-direction: column;
   align-items: stretch;
 }
+.comments .comment:last-child {
+  margin-bottom: 30px;
+}
 .comments > h3 {
   font-weight: 400;
   line-height: 1;

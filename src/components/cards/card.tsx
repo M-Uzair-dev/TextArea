@@ -161,7 +161,7 @@ const card = ({
           </div>
         </div>
         <div className="rightuserinfo">
-          {profile ? (
+          {item.postedBy._id === userID ? (
             <Button
               onClick={(e) => {
                 e.stopPropagation();
