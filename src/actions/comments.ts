@@ -88,7 +88,7 @@ export async function Populate(commentIds: string[]) {
     console.log(commentIds);
     let comments = await CommentModel.find({
       _id: { $in: commentIds },
-    }).sort({ createdAt: -1 });
+    });
     let newcomments: string = JSON.stringify(comments);
     return {
       success: true,
@@ -96,6 +96,57 @@ export async function Populate(commentIds: string[]) {
     };
   } catch (e: any) {
     console.log(e);
+    return {
+      success: false,
+      message: e.message || "Something went wrong !",
+    };
+  }
+}
+
+export async function DeleteComment(
+  commentID: string,
+  userID: string,
+  postId: string
+) {
+  try {
+    if (!commentID || !userID || !postId)
+      return {
+        success: false,
+        message: "Unauthorized",
+      };
+    const comment = await CommentModel.findById(commentID);
+    if (comment) {
+      if (comment.authorId.toString() !== userID)
+        return {
+          success: false,
+          message: "Unauthorized",
+        };
+
+      const post = await postModel.findById(postId);
+      if (!post) {
+        return {
+          success: false,
+          message: "Unauthorized",
+        };
+      }
+
+      post.comments = post.comments.filter(
+        (id: string) => id.toString() !== commentID.toString()
+      );
+
+      await post.save();
+      await comment.deleteOne();
+      return {
+        success: true,
+        message: "Comment deleted successfully",
+      };
+    }
+
+    return {
+      success: false,
+      message: "Comment not found",
+    };
+  } catch (e: any) {
     return {
       success: false,
       message: e.message || "Something went wrong !",

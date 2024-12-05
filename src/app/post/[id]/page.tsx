@@ -405,7 +405,7 @@ const page = ({ params }: any) => {
               {commentLoading ? <Loader size={0.5} white /> : "Post"}
             </Button>
           </div>
-          <Comments added={added} commentsIds={post.comments} />
+          <Comments added={added} commentsIds={post.comments} postID={id} />
         </>
       )}
     </div>

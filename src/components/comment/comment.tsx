@@ -1,12 +1,46 @@
-import Image from "next/image";
-import React from "react";
-import Button from "@/components/button/primary";
+"use client";
 
-const comment = ({ comment }: { comment: any }) => {
+import Image from "next/image";
+import React, { useState } from "react";
+import Button from "@/components/button/primary";
+import { getCookie } from "@/utils/utils";
+import { useRouter } from "next/navigation";
+import { DeleteComment } from "@/actions/comments";
+import { toast } from "sonner";
+const comment = ({ comment, postID }: { comment: any; postID: string }) => {
+  const userID = getCookie("user");
+  const router = useRouter();
+  const isAuthor = userID === comment?.authorId;
+  const [deleted, setDeleted] = useState(false);
+
+  const RemoveComment = async () => {
+    if (!comment?._id || !userID) return;
+    setDeleted(true);
+    const answer = await DeleteComment(comment?._id, userID, postID);
+    if (!answer.success) {
+      toast.error(answer.message || "Comment Deletion Failed !");
+      setDeleted(false);
+    }
+  };
+
   return (
-    <div className="comment">
+    <div
+      className="comment"
+      style={
+        deleted
+          ? {
+              display: "none",
+            }
+          : {}
+      }
+    >
       <div className="userinfo">
-        <div className="leftuserinfo">
+        <div
+          className="leftuserinfo"
+          onClick={() => {
+            router.push("/profile/" + comment?.authorId);
+          }}
+        >
           <Image
             src={
               comment?.authorpfp ||
@@ -25,7 +59,7 @@ const comment = ({ comment }: { comment: any }) => {
           </div>
         </div>
         <div className="rightuserinfo">
-          <Button>Report</Button>
+          {isAuthor ? <Button onClick={RemoveComment}>Delete</Button> : <></>}
         </div>
       </div>
       <h3 className="text" style={{ whiteSpace: "pre-wrap" }}>

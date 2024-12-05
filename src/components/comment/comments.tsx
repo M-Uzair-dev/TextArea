@@ -8,9 +8,11 @@ import Loader from "../loader/loader";
 const comments = ({
   commentsIds,
   added,
+  postID,
 }: {
   commentsIds: string[];
   added: any[];
+  postID: string;
 }) => {
   const [loading, setLoading] = useState(true);
   const [noComm, setNoComm] = useState(false);
@@ -60,17 +62,21 @@ const comments = ({
         >
           <Loader />
         </div>
+      ) : added && noComm ? (
+        added?.map((comment: any) => (
+          <Comment key={comment._id} comment={comment} postID={postID} />
+        ))
       ) : noComm ? (
         <p style={{ textAlign: "center" }}>No comments</p>
       ) : added ? (
         added
           .concat(comments)
           ?.map((comment: any) => (
-            <Comment key={comment._id} comment={comment} />
+            <Comment key={comment._id} comment={comment} postID={postID} />
           ))
       ) : (
         comments?.map((comment: any) => (
-          <Comment key={comment._id} comment={comment} />
+          <Comment key={comment._id} comment={comment} postID={postID} />
         ))
       )}
     </div>
